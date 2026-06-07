@@ -18,10 +18,10 @@ git init
 git add .
 git commit -m "feat: Rocky Clinic LIVEHunt 07 scenario page"
 git branch -M main
-git remote add origin https://github.com/YoungTravis03/rocky-clinic-hunt.git
+git remote add origin https://github.com/YoungTravis03/LIVEHunt-07-Rocky-Clinic-OpenEMR-Breach)
 git push -u origin main
 
-https://YoungTravis03.github.io/rocky-clinic-hunt/
+https://github.com/YoungTravis03/LIVEHunt-07-Rocky-Clinic-OpenEMR-Breach)
 
 
 
