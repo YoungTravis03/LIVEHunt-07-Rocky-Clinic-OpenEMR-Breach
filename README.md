@@ -55,30 +55,12 @@ https://github.com/YoungTravis03/LIVEHunt-07-Rocky-Clinic-OpenEMR-Breach)
       <div class="memo-line">Re: <span>OpenEMR breach // post-incident reconstruction</span></div>
       <hr class="memo-divider">
 
-      <p><em>"Rocky Clinic ran quiet until it did not. No ransomware, no alerts, no outage, just an operator moving through the estate like they belonged. Read the brief, then acknowledge when you are ready to start."</em></p>
-
-      <p>Rocky Clinic runs OpenEMR, a cloud-hosted electronic health record platform for patient data and clinical workflow. Earlier this month they identified a security incident. The initial access path is unknown.</p>
-
-      <p>This one began quietly. No ransomware, no alerts, no outage. Early activity inside the application looked like ordinary administration, but the pattern was deliberate exploration of identities, data, and workflows, before a pivot to the underlying host.</p>
-
-      <p>Your job is to reconstruct the whole arc. What the attacker learned, how they expanded access, how a low-noise look-around turned into full operational compromise, and how data left the building.</p>
-
-      <p><strong>What we do not yet know:</strong></p>
-      <ul class="unknown-list">
-        <li>The initial access path (still unattributed)</li>
-        <li>What persisted, and whether it survives a reboot</li>
-        <li>How control was established and data moved out</li>
-        <li>What the operator did to cover the trail</li>
-      </ul>
-
-      <p>Evidence sits in the Sentinel workspace for this host. Discover the schema yourself with <code>take 1</code> or <code>getschema</code> — that is part of the work. Some answers are process telemetry, others live in the alert and other tables. Pivot across them.</p>
-
-      <p>Scope tightly. Every query in this hunt runs lighter with explicit time bounds, the window is <strong>4 to 14 February 2026 UTC</strong>. Narrow further per phase as you learn the timeline.</p>
-
-      <p>Section 00 is a gate. The phrase to submit is in this brief:</p>
-      <div class="gate-phrase">▶ ready to hunt</div>
-    </div>
-  </div>
+  DeviceProcessEvents
+| where Timestamp > ago(24h)
+| where InitiatingProcessFileName in~ ("python", "python3", "perl", "ruby", "vim", "vi", "less", "more", "man", "find", "awk", "nmap", "bash", "sh", "zsh")
+| where FileName in~ ("bash", "sh", "zsh", "dash", "ksh")
+| project Timestamp, DeviceName, AccountName, InitiatingProcessFileName, InitiatingProcessCommandLine, FileName, ProcessCommandLine
+| order by Timestamp desc
 
   <div class="scope-banner">
     ⏱ INVESTIGATION WINDOW: datetime(2026-02-04) .. datetime(2026-02-14) &nbsp;|&nbsp; HOST: rocky83 &nbsp;|&nbsp; SENTINEL WORKSPACE
