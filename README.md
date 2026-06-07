@@ -12,7 +12,7 @@ Threat hunt scenario page for the Rocky Clinic OpenEMR breach investigation.
 - Q04 Privilege Escalation (Anomalous Logons, SHA256)
 
 ## Usage
-Open `index.html` directly in a browser, or deploy via GitHub Pages.
+Open `file:///C:/Users/travi/Downloads/rocky-clinic-hunt.html` directly in a browser, or deploy via GitHub Pages.
 
 git init
 git add .
